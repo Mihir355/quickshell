@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Navbar from "./components/Navbar"; // Navbar component
+import TicketCard from "./components/TicketCard"; // TicketCard component
 
 function App() {
+  const [selectedGrouping, setSelectedGrouping] = useState(""); // Grouping: status, user, priority
+  const [selectedSorting, setSelectedSorting] = useState(""); // Sorting: priority, title
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar
+        onGroupingSelect={(group) => setSelectedGrouping(group)}
+        onSortingSelect={(sort) => setSelectedSorting(sort)}
+      />
+      <main>
+        <TicketCard
+          selectedGrouping={selectedGrouping}
+          selectedSorting={selectedSorting}
+        />
+      </main>
     </div>
   );
 }
